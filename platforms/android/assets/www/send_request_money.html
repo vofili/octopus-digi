@@ -1,0 +1,203 @@
+<style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #fff;
+            }
+			.scroll-fix-slider{
+			overflow-y: scroll;
+			overflow-x: hidden;
+			}
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+        </style>
+       <div class="formsection_content">
+        <div class="middle_title">
+          <h2>{{pagetitle}}</h2>
+          <img src="images/octopus_image.png" alt="image"> </div>
+        <div class="transfer_information clearfix">
+          <div class="send_money">
+           
+            
+            <div class="row">
+             <div class="col-sm-6">
+                <div class="form-group">
+                  <label>how much <b>*</b></label>
+                  <input type="number" ng-model="transferdata.amount" class="form-control inputbox_control bank_mandatory" onchange="setTwoNumberDecimal(this)" id="destamt" >
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+               <div class="col-sm-6">
+                <div class="form-group">
+                  <div class="input-group">
+                  <label id="destaccountlabel">His/Her Account <b>*</b></label>
+                  <input type="tel" maxlength="10" ng-model="transferdata.destaccount" class="form-control inputbox_control bank_mandatory" >
+					<div class="input-group-btn">
+					<button type="button" class="btn btn-md btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" ng-click="getBankFromAccount(transferdata.destaccount)" aria-expanded="false">{{transferdata.destbankname}}<span class="caret"></span>
+						<br/> </button>
+					<ul class="dropdown-menu dropdown-menu-right accountlisting_view ">
+						<loading></loading>
+					 <li class="" ng-repeat="bank in banklist" ng-click="transferdata.destbankname = bank.bankname;transferdata.destbankcode=bank.bankcode;getNameFromAccount(transferdata.destaccount,bank.bankname,bank.bankcode)"><a href="" alt="">{{bank.bankname}}</a></li>
+					</ul>
+				  </div><!-- /btn-group -->
+                 
+                 </div><!--   /inpout group -->
+                  <span ng-if="isuservalid === 'yes'">Pick from <a class="" href="" ng-click="showbeneficiary()">Beneficiary list</a></span>
+                </div>
+              </div>
+            </div>
+            
+               <div pageslide ps-open="selectbeneficiary" ps-size ="100%"  ng-class="{'scroll-fix-slider': true}"> 
+					<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="" ng-click="selectbeneficiary=false" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+						<h2>Beneficiary </h2>
+						<span>Select from your Beneficiary List</span> 
+					</div>
+					
+					</div>
+				   <loading></loading>
+					<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+							<li ng-repeat="benitem in fetchbenelist" ng-click="pickbeneficiary(benitem.beneaccount,benitem.benename,benitem.benebankcode,benitem.benebank)"> <a href=""> <strong>{{benitem.benename}} </strong> {{benitem.beneaccount}}|{{benitem.benebank}} </a> </li>
+							
+					</ul>
+				</div>
+            
+            <div class="row" >
+            <div class="col-sm-6">
+				<loading></loading>
+            	<div ng-if="beneficiaryvalid" class="alert alert-success" role="alert">{{transferdata.destbeneficiaryname}}</div>
+			  </div>
+			  </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label id="destnarrationlabel">Narrative</label>
+                  <textarea class="form-control inputbox_control"  ng-model="transferdata.narration"></textarea>
+                  </div>
+              </div>
+            </div>
+
+            <div class="right_transferInfo">
+              <div class="button_group">
+                <button type="button" ng-click="gotohome()" class="btn btn-default save_button save_btn sendreqsave_button">Cancel</button>
+                <button type="button" ng-disabled="disablesend" class="btn btn-default send_button save_btn" ng-click="gotoFundsTransferConfirm(transferdata.amount,transferdata.destbankname,transferdata.destbankcode,transferdata.destbeneficiaryname,transferdata.destaccount)">Send</button>
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div class="modal_popupSmall getbankfromaccount_popup">
+    <div class="tophead_modal">
+        <div class="top_modalView"> 
+            <a href="#" class="close_getbank_popup_modal close_login_modal">
+              <img src="images/close_white.png" alt="image">
+            </a>
+          <h2>Bank</h2>
+          <span>Please choose a Bank</span>
+        </div>
+    </div>
+      <ul class="accountlisting_view  mCustomScrollbar light country_list" id="middle_bankoption">
+       
+      <script type="text/javascript">
+        
+     </script>
+   </ul>
+  </div>
+
+  <div class="modal_popupSmall getmyaccount_popup">
+    <div class="tophead_modal">
+        <div class="top_modalView"> 
+            <a href="#" class="close_getbank_popup_modal close_login_modal">
+              <img src="images/close_white.png" alt="image">
+            </a>
+          <h2>Account</h2>
+          <span>Please choose an Account</span>
+        </div>
+    </div>
+      <ul class="accountlisting_view  mCustomScrollbar light country_list" id="middle_myaccountoption">
+       
+      <script type="text/javascript">
+        
+     </script>
+   </ul>
+  </div>
+
+   <div class="modal_popupSmall getbeneficiary_popup">
+    <div class="tophead_modal">
+        <div class="top_modalView"> 
+            <a href="#" class="close_getbank_popup_modal close_login_modal">
+              <img src="images/close_white.png" alt="image">
+            </a>
+          <h2>Benenficiary</h2>
+          <span>Please choose a Beneficiary</span>
+        </div>
+    </div>
+      <ul class="accountlisting_view  mCustomScrollbar light country_list" id="middle_benoption">
+        <li> <a href="#" alt='0009781760|Access Bank|035|Tolulope Lawson'> <strong>Tolulope Lawson </strong> 0009781760|Access Bank</a> </li>
+        <li> <a href="#" alt='0002643239|GTBank|058|Emeka Igwe'> <strong>Emeka Igwe </strong> 0002643239|GTBank </a> </li>
+        <li> <a href="#" alt='5300001076|Heritage|021|Haruna Lancaster'> <strong>Haruna Lancaster </strong> 5300001076|Heritage </a> </li>
+        <script type="text/javascript">
+        </script>
+
+   </ul>
+  </div>
+
+
+
+
+<script type="text/javascript">
+/* decimal work */
+function setTwoNumberDecimal(el) {
+	if(el.value != ""){
+		el.value = parseFloat(el.value).toFixed(2);
+	}
+}
+/* decimal work */
+</script>

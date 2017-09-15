@@ -1,0 +1,184 @@
+<style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #fff;
+            }
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+        </style>
+
+       <div class="formsection_content" ng-controller="mobileController">
+			<div class="middle_title">
+			  <h2>{{ pagetitle }}</h2>
+			  <img src="images/octopus_image.png" alt="image">
+			  </div>
+       <form name="mobiletopupform" ng-submit="validatetopup()">
+        <div class="transfer_information clearfix">
+          <div class="send_money">
+            <div class="row">
+              <div class="col-sm-6">
+              <div class="form-group" ng-class="{'error_message': (mobiletopupform.mobiletopup_phone.$error.minlength || mobiletopupform.mobiletopup_phone.$error.maxlength || mobiletopupform.mobiletopup_phone.$invalid) && mobiletopupform.mobiletopup_phone.$touched}">
+                  <label id="phonenumber_label" for="mobiletopup_phone">Phone Number: <b>*</b></label>
+                  <input type="tel" class="form-control inputbox_control bank_mandatory" 
+                  ng-model="mobiledata.mobiletopup_phone" id="mobiletopup_phone" maxlength="113" ng-maxlength="13" ng-minlength="9" required name="mobiletopup_phone">
+                  <span ng-show="(mobiletopupform.mobiletopup_phone.$invalid || mobiletopupform.mobiletopup_phone.$invalid || mobiletopupform.mobiletopup_phone.$invalid ) && mobiletopupform.mobiletopup_phone.$touched" class="help-block">
+                  The phone number entered is invalid
+                  </span>
+                  <span ng-if="isuservalid === 'no'">
+                 	Check 
+                 		<a class="mobile_topup_phoneno_octopus open_smallpopup" href="" ng-click="togglePhone()">PhoneBook</a>
+                  </span>
+				  <span ng-if="isuservalid === 'yes'" >Top up my <a href=""  ng-click="returnUserphone()">Phone </a> or Check 
+                 	<a href="" ng-click="toggleOctopus()"> Octopus </a>     
+                  </span>
+				 <div pageslide ps-open="phonechecked" ps-size ="100%"> 
+					<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="#" ng-click="togglePhone()" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+						<h2>Phone No</h2>
+						<span>Select from Phone Book</span> 
+					</div>
+					
+					</div>
+					<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+						<li ng-repeat="phone in phones" ng-click="phoneSelected(phone.number)"> <a href="" alt="{{phone.number}}"> <strong>{{phone.name}}</strong>{{phone.number}}</a> </li>
+					</ul>
+				</div>
+				
+				<div pageslide ps-open="octopussearch" ps-size ="100%"> 
+					<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="#" ng-click="toggleOctopus()" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+						<h2>Phone No</h2>
+						<span>Select from Phone Book</span> 
+					</div>
+					</div>
+					<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+						<li ng-repeat="phone in phones" ng-click="phoneSelected(phone.number)"> <a href="" alt="{{phone.number}}"> <strong>{{phone.name}}</strong>{{phone.number}}</a> </li>
+					</ul>
+				</div>
+			</div>
+            </div>
+            </div>
+            <div class="row">
+				  <div class="col-sm-6">
+					<div class="form-group" ng-class="{'error_message': mobiletopupform.mobiledata_amount.$invalid && mobiletopupform.mobiledata_amount.$touched}">
+					  <label id="howmuch_label" for="mobiledata_amount">how much <b>*</b></label>
+					  <input type="number" onchange="setTwoNumberDecimal(this)" class="form-control inputbox_control" 
+					  ng-model="mobiledata.amount" required name="mobiledata_amount" id="mobiledata_amount">
+					<span ng-show="mobiletopupform.mobiledata_amount.$invalid" class="help-block">Please enter a valid amount</span>
+					  <span ng-if="userstatus === 'valid'" >check <a class="mobile_topup_howmuch_history open_smallpopup" href="">history</a> </span>
+					  </div>
+				  </div>
+           		 <div class="col-sm-6">
+					 <div class="btn-group dropup">
+					  <button class="btn btn-default btn-md " type="button" data-toggle="dropdown"  ng-click="toggleTelco()">
+						  {{mobiledata.mobilenetwork}}
+					  </button>
+					  <button class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="toggleTelco()">
+					  <span class="caret"></span>
+					</button>
+					  <ul class="dropdown-menu accountlisting_view light">
+						  <loading></loading>
+						  <li  ng-click="telcoSelected(items.billername,items.billerid,items.paymentitemname,items.paymentcode)" ng-repeat="items in telcoarray"><a href="">{{items.billername}}</a></li>
+
+					  </ul>
+					</div>
+				</div>
+       		</div>
+            <div class="row">
+              <div class="col-sm-12" id="telcoimage">
+              </div>
+            </div>
+            <div class="right_transferInfo">
+              <div class="button_group">
+                <button type="button" ng-click="gotohome()" class="btn btn-default">CANCEL</button>
+                <button type="submit" ng-disabled="mobiletopupform.$invalid" class="btn btn-default send_button">DO IT</button>
+               </div>
+            </div>
+            
+          </div>
+        </div>
+        
+		</form>
+     
+      </div>
+
+
+<script type="text/javascript">
+
+
+/* decimal work */
+function setTwoNumberDecimal(el) {
+	if(el.value != ""){
+		el.value = parseFloat(el.value).toFixed(2);
+	}
+}
+/* decimal work */
+
+</script>
+<script type="text/javascript">
+$(document).on('click','.send_button', function(){
+            			var flag=1;
+            			$('.bank_mandatory').each(function(){
+            				if($(this).val() ===''){
+            						flag=2;
+            					$(this).parent().addClass("error_message");
+            				}else{
+            					$(this).parent().removeClass("error_message");
+            				}
+
+            			});
+            			//on non empty field it will enter in if
+            			if(flag ===1)
+            			{
+
+            			}
+
+
+            		});
+		   </script>
+
+

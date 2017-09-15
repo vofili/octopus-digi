@@ -1,0 +1,94 @@
+
+
+<div class="formsection_content">
+    <div class="middle_title">
+        <h2>{{" " + pagetitle}}</h2>
+        <img src="images/octopus_image.png" alt="image">
+    </div>
+    <div class="transfer_information clearfix">
+        <form id="add_bank_form">
+        <div class="send_money">
+             <div class="row" ng-if="myaccountadded">
+                <div class="col-sm-6">
+                    	<loading></loading>
+            			<div class="alert alert-success" role="alert">Account Added Successfully</div>
+			    </div>
+              
+            </div>
+           
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                  <div class="input-group">
+                        <label>Account No. <b>*</b></label>
+                        
+                        <input type="tel" class="form-control inputbox_control bank_mandatory" ng-model="addaccount.myaccount"  maxlength="10">
+					  <div class="input-group-btn">
+					  <button type="button" class="btn btn-md btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" ng-click="getBankFromAccount(addaccount.myaccount)" aria-expanded="false">
+					  {{addaccount.mybankname}}<span class="caret"></span><br/>
+						 </button>
+						<ul class="dropdown-menu dropdown-menu-right accountlisting_view ">
+						<loading></loading>
+					 <li class="" ng-repeat="bank in banklist" ng-click="selectBank(addaccount.myaccount,bank.bankcode,bank.bankname)"><a href="" alt="">{{bank.bankname}}</a></li>
+					</ul>
+					</div>
+                    </div>
+                </div>
+              </div>
+			</div>
+            <div class="row">
+                <div class="col-sm-6">
+                    	<loading></loading>
+            			<div ng-if="myaccountvalid" class="alert alert-success" role="alert">{{addaccount.myaccountname}}</div>
+			    </div>
+              
+            </div>
+            <div class="row">
+               <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>BVN <b>*</b></label>
+                        <input type="tel" ng-model="addaccount.mybvn" class="form-control inputbox_control bank_mandatory" maxlength="11" >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" ng-model="addaccount.myemail" class="form-control inputbox_control "  >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Phone Number <b>*</b> </label>
+                        <input type="tel" ng-model="addaccount.myphone" class="form-control inputbox_control bank_mandatory"  maxlength="11">
+                    </div>
+                </div>
+            </div>
+            <div class="right_transferInfo">
+                <div class="button_group">
+                   <button type="button" class="btn btn-default send_button save_button addbank_reset">Reset</button>
+                    <button type="button" class="btn btn-default  save_button save_btn addbank_send" ng-click="doAddAccountConfirm()">Send</button>
+                    <button type="button" class="btn btn-default send_button cancel_home">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <form>
+    </div>
+</div>
+
+
+
+<script>
+	$(document).ready(function(){
+
+			$(".popup_close").click(function(){
+			$(".modal_popup").removeClass("modal_popup_active");
+			$(".overlay_modal").removeClass("c-mask-active");
+			});
+
+			$('.addbank_reset').on('click', function(){
+			$('#add_bank_form')[0].reset();
+
+			});
+
+	});
+</script>

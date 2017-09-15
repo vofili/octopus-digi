@@ -1,0 +1,46 @@
+
+
+
+
+<div class="information-accountlist">
+ 
+   <ul>
+      <li class="account-openview" ng-if="recommendmobiletopup">
+         <a href="" class="visible-xs close_info" ng-click="recommendmobiletopup = false"><img src="images/close_blue_circle.png" alt="image" ></a>
+         <a class="rechargemyphone_index" href=""  ui-sref="mobiletopup">
+            <figure><img src="images/mobile_recharge.png" alt="image"  class="hide_hover"> <img src="images/mobile_recharge_white.png" alt="image" class="show_hover"></figure>
+            Recharge my phone {{utken}} <b>with N1000.00</b>
+           
+         </a>
+      </li>
+      <li class="account-openview" ng-if="recommendfundstransfer">
+         <a href="" class="visible-xs close_info " ng-click="recommendfundstransfer = false"><img src="images/close_blue_circle.png" alt="image" ></a>
+         <a class="fundtransfer_index" href="">
+            <figure><img src="images/transfer-send_icon.png" alt="image"> <img src="images/transfer-send_icon_white.png" alt="image" class="show_hover"></figure>
+            Send money to Friends and Family 
+         </a>
+      </li>
+      <li class="account-openview" ng-if="recommendbillspayment">
+         <a href="" class="visible-xs close_info" ng-click="recommendbillspayment = false"><img src="images/close_blue_circle.png" alt="image" ></a>
+         <a  class="paybills_index" href="#">
+            <figure><img src="images/bill_icon.png"  alt="image"> <img src="images/bill_icon_white.png" alt="image" class="show_hover"></figure>
+            Pay your DSTV <b>{{nextmonth}} subscription</b>
+         </a>
+      </li>
+      
+   </ul>
+</div>
+
+  
+
+
+<script type="text/javascript">
+     
+</script>
+<script>
+	/* decimal work */
+function setTwoNumberDecimal(el) {
+    el.value = parseFloat(el.value).toFixed(2);
+}
+/* decimal work */
+</script>

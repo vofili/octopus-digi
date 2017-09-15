@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/val/Desktop/ionicmobile/octopusissue/platforms/android/build/intermediates/exploded-aar/org.apache.cordova/CordovaLib/6.2.3/debug/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cd2af1a7180eb6427b58d868cd841d8212aca77e">
+        <dex dex="/Users/val/Desktop/ionicmobile/octopusissue/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-6.2.3-debug_f1da9d355a89aa3ca194b01dfa430b0fa9b7413f.jar" />
+    </item>
+
+</items>

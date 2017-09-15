@@ -1,0 +1,145 @@
+<style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #fff;
+            }
+			.scroll-fix-slider{
+			overflow-y: scroll;
+			overflow-x: hidden;
+			}
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+  </style>
+       <div class="formsection_content">
+        <div class="middle_title">
+          <h2>{{pagetitle}}</h2>
+			
+          <img src="images/octopus_image.png" alt="image"> </div>
+        <div class="transfer_information clearfix">
+          <div class="send_money">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group focused">
+                  <label>{{payitemtitle}} <b>*</b></label>
+                  <input type="text" ng-model="savetopup.phone" class="form-control inputbox_control" value="">
+                 </div>
+               </div>
+              <div class="col-sm-6">
+                <div class="form-group focused">
+                  <label>Network <b>*</b></label>
+                  <input type="text" ng-model="savetopup.network" class="form-control inputbox_control bank_mandatory open_smallpopup" value="">
+                  <!--<span>Pick from <a href="javascript:void(0)">list</a></span>--></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group focused">
+                  <label>how much <b>*</b></label>
+                  <input type="text" class="form-control inputbox_control bank_mandatory" onchange="setTwoNumberDecimal(this)"  ng-model="savetopup.amount" value=""  >
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group focused">
+                  <label>Narrative</label>
+                  <textarea class="form-control inputbox_control" ng-model="savetopup.narrative"></textarea>
+                 </div>
+               </div>
+            </div>
+            <div class="right_transferInfo">
+              <div class="button_group">
+                
+                <button type="button" class="btn btn-default send_button cancel_home">Cancel</button>
+                <button type="button" 
+                ng-disabled="amount==='0'||billername===''||service===''||amount===''||narrative===''" ng-click="dosave(savetopup)" class="btn btn-default save_button" >SAVE IT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+<script>
+		$(document).ready(function(){
+			$(".open_smallpopup").click(function(){
+			$(".modal_popupSmall").addClass("modal_popup_active");
+			$(".overlay_modal_second").addClass("overlay_modal-active");
+			});
+
+			$(".popup_close").click(function(){
+			$(".modal_popup").removeClass("modal_popup_active");
+			$(".overlay_modal").removeClass("c-mask-active");
+			});
+
+			$(document).on('click', '.close_smallmodal' ,function(){
+			$(".modal_popupSmall").removeClass("modal_popup_active");
+			$(".overlay_modal_second").removeClass("overlay_modal-active");
+			});
+
+			$(".overlay_modal_second").click(function(){
+			$(".modal_popupSmall").removeClass("modal_popup_active");
+			$(".overlay_modal_second").removeClass("overlay_modal-active");
+			});
+
+		});
+</script>
+<script>
+
+	/* decimal work */
+function setTwoNumberDecimal(el) {
+    el.value = parseFloat(el.value).toFixed(2);
+}
+/* decimal work */
+
+</script>
+
+
+</body>
+</html>

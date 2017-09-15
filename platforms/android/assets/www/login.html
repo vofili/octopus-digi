@@ -1,0 +1,369 @@
+
+			<style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #fff;
+            }
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+				
+				.scroll-fix-slider{
+					overflow-x:hidden;
+					overflow-y:scroll;
+				}
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+        </style>
+
+
+		<div></div>
+			<!-- start login form -->
+
+  <div pageslide ps-open="customerexists" ps-size="100%" class="login_popup" id="open_modalbox" ps-click-outside="false">
+    <div class="tophead_modal" id="top_headpopup">
+      <div class="top_modalView"> <a href="#" ng-click ="customerexists=false" class="close_login_modal"><img src="images/close_white.png" alt="image"></a>
+        <h2>Validate Phone</h2>
+        <span>Octopus Mobile Banking</span> </div>
+    </div>
+    <div class="form_section">
+     <div class="alert alert-success" role="alert">
+     	Please complete your {{previoussection}} by validating your registered phone number
+     </div>
+     <form name="validationform" ng-submit="validateuser(loginphonenumber)" novalidate>
+      <div class="form-group" ng-class="{'error_message':validationform.loginphonenumber.$invalid && validationform.loginphonenumber.$touched}">
+        <label>Phone number <b>*</b></label>
+        <input type="tel" ng-model="loginphonenumber" id="loginphonenumber" name="loginphonenumber"  class="form-control inputbox_control" maxlength="13" required>
+		  <span class="help-block" ng-show="validationform.loginphonenumber.$invalid && validationform.loginphonenumber.$touched">
+		  	The phone number entered is invalid
+		  </span>
+        <loading></loading>
+      </div>
+      <div ng-if="customershouldregister" class="alert alert-warning" role="alert">
+		</div>
+      <div class="button_group">
+        <button class="btn btn-default save_btn" type="submit" id="open_smallpopup" ng-disabled="validationform.$invalid">{{nextaction}}</button>
+      </div>
+	</form>
+    </div>
+  </div>
+ <!-- Login form password --->
+  <div pageslide ps-open="customerpassword" class="password_popup" id="open_modalbox" ps-size="100%" ps-click-outside="false">
+    <div class=" tophead_modal" id="top_headpopup">
+      <div class="top_modalView"> <a href="#" class="close_password_popupmodal" ng-click="customerpassword=false"><img src="images/close_white.png" alt="image"></a>
+        <h2>Password</h2>
+        <span>Enter your login password</span> </div>
+    </div>
+    <div class="form_section fixed_width">
+
+      <div class="password_field">
+        <input type="password" id="passwordview" name="password" ng-model="loginpassword" placeholder"" maxlength="6">
+      </div>
+      <ul class="password_keypad">
+        <li><a href="" id="enter1" ng-click="formLoginPassword(1)">1</a></li>
+        <li><a href="" ng-click="formLoginPassword(2)">2</a></li>
+        <li><a href="" ng-click="formLoginPassword(3)">3</a></li>
+        <li><a href="" ng-click="formLoginPassword(4)">4</a></li>
+        <li><a href="" ng-click="formLoginPassword(5)">5</a></li>
+        <li><a href="" ng-click="formLoginPassword(6)">6</a></li>
+        <li><a href="" ng-click="formLoginPassword(7)">7</a></li>
+        <li><a href="" ng-click="formLoginPassword(8)">8</a></li>
+        <li><a href="" ng-click="formLoginPassword(9)">9</a></li>
+        <li><a href="" ng-click="formLoginPassword(0)">0</a></li>
+        <li><a href="" class="delbutton" ng-click="formDelLoginPassword()"> <img src="images/delete128.png" alt="image"></a></li>
+		 
+      </ul>
+      <loading></loading>
+     	
+    </div>
+</div>
+
+ <div pageslide ps-open="customershouldregister" ps-size="100%" id="slide_left" class="" ps-click-outside="false" ng-class="{'scroll-fix-slider':true}">
+    <div class="tophead_modal" id="top_headpopup">
+      <div class="top_modalView"> <a href="#" ng-click="customershouldregister = false" class="close_smallmodal">
+       <img src="images/close_white.png" alt="image"></a>
+        <h2>Registration</h2>
+        <span>Octopus Mobile Banking </span> 
+      </div>
+     </div>
+     
+     <div class="form_section">
+     <form name="accountregform" ng-submit="registerSubmitSetPin(useracct,userregbvn)">
+      <div class="form-group" ng-class="{'error_message': (accountregform.useracct.$invalid || accountregform.useracct.$error.minlength) && accountregform.useracct.$touched}">
+        <label>Account Number <b>*</b></label>
+        <div class="input-group">
+        <input type="tel" ng-model="useracct"  class="form-control inputbox_control" maxlength="10" ng-minlength="10" required name="useracct">
+			<span ng-show="(accountregform.useracct.$invalid || accountregform.useracct.$error.minlength) && accountregform.useracct.$touched" class="help-block">The account number is invalid</span>
+        	<div class="input-group-addon" ng-click="checkuseracct(useracct)">
+        	<!--<div class="input-group-btn">-->
+				<span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
+				ng-click="checkuseracct(useracct)" aria-expanded="false">{{bankchoosen}}
+				<span class="caret"></span>
+				</span>
+				 <ul class="dropdown-menu dropdown-menu-right">
+						<loading></loading>
+					 <li ng-repeat="bank in banklist" ng-click="updateBankChoosen(bank.bankname,bank.bankcode)"><a href="" alt="">{{bank.bankname}}</a>
+					 </li>
+				</ul>
+			</div>
+		</div>
+      </div>
+
+     
+     	<div class="form-group">
+        <label>BVN <b>*</b></label>
+        <div class="input-group">
+        <input type="tel" ng-model="userregbvn" class="form-control inputbox_control" maxlength="11">
+        	<div class="input-group-addon" ng-click="showforgotbvnalert()">
+				<span class="glyphicon glyphicon-question-sign"  ng-click="showforgotbvnalert()" data-toggle="dropdown" aria-haspopup="true" >
+			</div>
+		</div>
+			
+		</div>
+		<ul class="list-group">
+		 <li class="list-group-item">
+			 <span class="small text-muted">Enter BVN Later</span>
+			            <div class="material-switch pull-right">
+                            <input id="addbvnswitch" name="addbvnlaterflag" type="checkbox" ng-model="addbvnlater"/>
+                            <label for="addbvnswitch" class="label-info"></label>
+						 </div>
+			</li>
+		</ul>
+		<div ng-if="bvnvalid" class="alert alert-info alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  
+					  <span class="glyphicons glyphicons-warning-sign"></span>BVN supplied for {{custfname}}!
+		</div>
+		
+      <div class="button_group">
+        <button class="btn btn-default save_btn" ng-disabled="accountregform.$invalid" type="submit" id="open_smallpopup">NEXT</button>
+      </div>
+		</form>
+    </div>
+   			
+ </div>     
+<!--- end Registration Form  ----->
+
+<div pageslide ps-open="manualcustdetail" ps-size="100%" id="slide_left" ps-click-outside="false" ng-class="{'scroll-fix-slider':true}">
+			 
+	<div class="top_modalView"> <a href="#" ng-click="manualcustdetail=false" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+        <h2>Registration</h2>
+        <span>Octopus Mobile Banking </span> 
+    </div>
+     <form name="registerform" ng-submit="registerUserDetailsSetPin(registerform.$valid)" novalidate> 
+     
+      <div class="form_section">
+        <div class="transfer_information clearfix">
+             
+            <div id="register_add">
+            <div class="row">
+				<div class="col-sm-6">
+                  	<div class="form-group" ng-class="{'error_message':registerform.firstname.$invalid && registerform.firstname.$touched}">
+                    <label id="accountlabel">First Name <b>*</b></label>
+                    <input type="text" ng-model="custfname" name="firstname" class="form-control inputbox_control " id="firstname" required>
+                    
+  					<span class="help-block" ng-show="registerform.firstname.$invalid && registerform.firstname.$touched">Please supply a valid Firstname!</span>
+                  	</div>
+                	</div>
+                	
+                	<div class="col-sm-6">
+                  	<div class="form-group" ng-class="{'error_message':registerform.lastname.$invalid && registerform.lastname.$touched}">
+                    <label id="accountlabel">Last Name <b>*</b></label>
+                    <input type="text" ng-model="custlname" name="lastname" class="form-control inputbox_control " id="lastname" required>
+                    
+  					<span class="help-block" ng-show="registerform.lastname.$invalid && registerform.lastname.$touched">Please supply a valid Lastname!</span>
+                  	</div>
+                	</div>
+                	
+                	<div class="col-sm-6">
+                  	<div class="form-group" ng-class="{'error_message':registerform.email.$invalid && registerform.email.$touched}">
+                    <label id="accountlabel">Email </label>
+                    <input type="email" ng-model="custemail" name="emailaddress" class="form-control inputbox_control " id="emailaddress" required>
+                    
+  					<span class="help-block" ng-show="registerform.email.$invalid && registerform.email.$touched">Please supply a valid email!</span>
+ 
+                  	</div>
+                	</div>
+                	
+					<div class="col-sm-6">
+						<div class="form-group">
+						<datepicker date-format="dd-MMM-yyyy" date-max-limit="2007/12/31"  date-set="2007/12/31">
+						  	  <input ng-model="dateofbirth" name="dateofbirth" class="form-control" type="text" id="dob" placeholder="Date of Birth" required/>
+						</datepicker>
+							<span class="help-block" ng-show="registerform.dateofbirth.$invalid && registerform.dateofbirth.$touched"></span>
+						</div>
+					</div>
+					<div class="col-sm-6">
+							<div class="radio">
+								 <label><input type="radio" name="gender" ng-click="selectgender('male')" ng-model="male">male</label>
+							</div>
+						
+							<div class="radio">
+								 <label><input type="radio" name="gender" ng-click="selectgender('female')" ng-model="female">female</label>
+							</div>
+							
+  							<span class="error" ng-show="genderinvalid">Please select a Gender!</span>
+				
+					</div>
+               	 
+               	 <div class="col-sm-3">
+                	 <div class="right_transferInfo col-sm-3">
+						<div class="button_group">
+						  <button type="submit"  ng-disabled="registerform.$invalid" class="btn btn-default" id="regbutton">Submit</button>
+						</div>
+					</div>
+				</div>
+
+				</div>
+			  </div>
+			
+		  </div>
+	</div>
+		 
+	</form>
+
+</div>
+
+<!----  end no-bvn complete registration form  ------>
+
+<!---- start Registration Password ---->
+
+<div pageslide ps-open="enterregisterpassword" ps-size="100%" ps-click-outside="false">
+
+    <div class="tophead_modal" id="top_headpopup">
+      <div class="top_modalView"> <a href="#" class="close_Password_modal" ng-click="enterregisterpassword = false"><img src="images/close_white.png" alt="image"></a>
+        <h2>Password</h2>
+        <span>Choose your Registration password</span> </div>
+    </div>
+    <div class="form_section fixed_width">
+      <div class="password_field">
+        <input type="password" id="regpasswordview" ng-model="loginpassword" placeholder="" maxlength="4">
+      </div>
+      <ul class="password_keypad">
+        <li><a href="" id="enter1" ng-click="formRegPassword(1)">1</a></li>
+        <li><a href=""   ng-click="formRegPassword(2)">2</a></li>
+        <li><a href=""   ng-click="formRegPassword(3)">3</a></li>
+        <li><a href=""   ng-click="formRegPassword(4)">4</a></li>
+        <li><a href=""  ng-click="formRegPassword(5)">5</a></li>
+        <li><a href=""   ng-click="formRegPassword(6)">6</a></li>
+        <li><a href=""   ng-click="formRegPassword(7)">7</a></li>
+        <li><a href=""  ng-click="formRegPassword(8)">8</a></li>
+        <li><a href=""   ng-click="formRegPassword(9)">9</a></li>
+         <li><a href="" ng-click="formRegPassword(0)">0</a></li>
+        <li><a href="" class="delbutton" ng-click="formDelRegPassword()"> <img src="images/delete128.png" alt="image"></a></li>
+        
+      </ul>
+		<loading></loading>
+    </div>
+ 
+</div>
+<!---  end Registration Password ------>
+<!--- Show Account Chooser ----->
+<div pageslide ps-open="selectaccount"  ps-size="100%" ps-click-outside="false" ng-class="{'scroll-fix-slider': true}">
+	<div class="tophead_modal" id="top_headpopup">
+		<div class="top_modalView"> <a href="#" class="close_smallmodal" ng-click="selectaccount=false"><img src="images/close_white.png" alt="image"></a>
+			<h2>{{mylisttitle}}</h2>
+			<span>How would you like to pay </span>
+		</div>
+	
+	</div>
+	<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+			   <li ng-if="accounts[0].accountnumber" ng-repeat="acct in accounts" ng-click="doPostLogin(acct.accountnumber,acct.bankcode,acct.bankname,'accounttrue')"> <a href=""> <strong>{{acct.accountnumber}}</strong>{{acct.bankname}} | {{acct.bankcode}}{{accounts.length}}</a> </li>
+		<li  ng-if="!accounts[0].accountnumber" ng-click="gotoaddaccount()"> <a href=""> <strong>No Accounts Registered</strong> Add Account</a> </li>
+	</ul>
+	 <hr/>
+	<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+			   <li ng-if="cards[0].cardno" ng-repeat="card in cards" ng-click="doPostLogin(card.cid,card.cardname,'','cardtrue')"> <a href=""> <strong>{{card.cardno}}</strong>{{card.cardbrand}} | {{card.cardbank}}</a> </li>
+			   <li  ng-if="!cards[0].cardno" ng-click="gotoaddcard()"> <a href=""> <strong>No Cards Registered</strong> Add Mastercard| Verve | Visa card </a> </li>
+	</ul>
+</div>
+
+<!----  show account chooser ------>
+
+<!---  enter OTP Token ------>
+<div pageslide ps-open = "otptokenentry" ps-size="100%" id="slide_left" ps-click-outside="false">
+			 
+	<div class="top_modalView"> <a href="#" ng-click="otptokenentry=false" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+        <h2>One Time Password</h2>
+        <span>Octopus Mobile Banking </span> 
+    </div>
+     <form name="otpform" ng-submit="sendotptoken(otptoken)"> 
+      <div class="form_section">
+<!--
+       <div class="form_section">
+        <div class="transfer_information clearfix">
+-->
+       
+        <div class="transfer_information clearfix">
+          <div class="send_money">
+            <div id="register_add">
+            	<div class="alert alert-info" role="alert">  {{otpmessage}}
+				</div>
+            <div class="row">
+				<div class="col-sm-6">
+                  	<div class="form-group" ng-class="{'error_message': otpform.otp.$invalid && otpform.otp.$touched}">
+                    <label id="accountlabel" for="otp">OTP / Token <b>*</b></label>
+                    <input type="text" ng-model="otptoken"  class="form-control inputbox_control " name="otp" id="otp" maxlength=6 required>
+						<span class="help-block" ng-show="otpform.otp.$invalid && otpform.otp.$touched">
+							  Please enter a valid token!
+						</span>
+                	</div>
+                	</div>
+				<loading></loading>
+               	 <div class="col-sm-3">
+                	 <div class="right_transferInfo col-sm-3">
+						<div class="button_group">
+						  <button type="submit" class="btn btn-default" id="regbutton">Submit</button>
+						</div>
+					</div>
+				</div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	</form>
+</div>
+<!----  end no-bvn complete registration form  ------>
+
