@@ -1,0 +1,205 @@
+<style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #fff;
+            }
+			.scroll-fix-slider{
+			overflow-y: scroll;
+			overflow-x: hidden;
+			}
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+        </style>
+		
+       <div class="formsection_content">
+        <div class="middle_title">
+          <h2>{{pagetitle}}</h2>
+          <img src="images/octopus_image.png" alt="image"> 
+        </div>
+        <div class="transfer_information clearfix">
+          <div class="send_money">
+            <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label id="paybillslabel">Biller  <b>*</b></label>
+                  <input type="text" class="form-control inputbox_control bank_mandatory" ng-model="billername" ng-focus="toggleshowbiller()">
+                  <!--<span>Pick from <a href="javascript:void(0)">list</a></span>--></div>
+              </div>
+          
+               <div pageslide ps-open="showbillercategory" ps-size="100%" ng-class="{'scroll-fix-slider': true}" > 
+               		<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="" ng-click="showbillercategory=false" class="close_smallmodal">
+					<img src="images/close_white.png" alt="image"/></a>
+						<h2>Biller Category </h2>
+						<span>Select your Biller Category </span> 
+					</div>
+					</div>
+		   	 		
+			   	 	<loading></loading>
+				  	<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+						<li ng-repeat="biller in billerlist" ng-click="billercategoryselect(biller.categoryid,biller.categoryname)"> <a href="" alt=""> <strong>{{biller.categoryname}} </strong>{{biller.categorydesc}}</a> 
+						</li>
+					</ul>
+				   
+				</div>
+				
+             
+              <div pageslide ps-open="categorydetail" ps-size ="100%" ng-class="{'scroll-fix-slider': true}" > 
+             	
+					<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="#" ng-click="categorydetail=false" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+						<h2>{{billercatselected}}  </h2>
+						<span>Select your Biller</span> 
+					</div>
+					
+					</div>
+			   	
+				   <loading></loading>
+				    
+					<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+						<li ng-repeat="billprovider in billerundercategory" ng-click="selectbillerfromcategory(billprovider)"> <a href="" alt=""> <strong>{{billprovider.billername}}</strong>{{billprovider.billerid}} | {{billprovider.categoryid}}</a> 
+						</li>
+					</ul>
+				  
+				</div>
+              
+              </div>
+              
+              
+            <div class="row">
+             
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Product/Service Specification <b>*</b></label>
+                  <input type="text" ng-model="prodcode" class="form-control inputbox_control bank_mandatory" ng-focus="showbillersvc()">
+<!--
+                  <span>check <a class="paybills_productservice_history open_smallpopup" href="">history</a> or <a class="paybills_productservice_octopus open_smallpopup" href="javascript:void(0)">octopus</a></span>
+                  
+-->
+                   <div pageslide ps-open="showbillerservices" ps-size ="100%" ng-class="{'scroll-fix-slider': true}" > 
+					<div class="tophead_modal" id="top_headpopup">
+					<div class="top_modalView"> <a href="#" ng-click="showbillerservices=false" class="close_smallmodal"><img src="images/close_white.png" alt="image"></a>
+						<h2>{{billerprovname}}  </h2>
+						<span>Select your Service</span> 
+					</div>
+					
+					</div>
+				   <loading></loading>
+					<ul class="accountlisting_view  mCustomScrollbar light" id="middle_accountoption">
+						<li ng-repeat="service in servicesarray" ng-click="selectbillerservice(service)"> <a href="" alt=""> <strong> {{service.paymentitemname}}</strong>{{service.amount / 100}}</a> 
+						</li>
+					</ul>
+				</div>
+        
+                </div>
+              </div>
+              
+               <div class="col-sm-6">
+                <div class="form-group">
+                  <label>how much <b>*</b></label>
+                  <input type="number" ng-model="paybills.amount" class="form-control inputbox_control bank_mandatory" onchange="setTwoNumberDecimal(this)" id="paybills_amount"  ng-readonly="fixedfeeflag">
+                  <span ng-if="svcfeeflag">This item includes a fee of NGN <a class="" href="" >{{svcfee}}</a></span></div>
+              </div>
+             <div class="row" >
+            	<div class="col-sm-6">
+				<loading></loading>
+            	<div ng-if="beneficiaryvalid" class="alert alert-success" role="alert">{{paybills.customername}}</div>
+			  	</div>
+			  </div>
+              
+               <div class="col-sm-6" ng-if="billcatknown">
+                <div class="form-group">
+                  <label id="customerid">{{customeridlabel}} <b>*</b></label>
+                  <input type="text" class="form-control inputbox_control " ng-change="custidchanges(paybills.customerid)" ng-model="paybills.customerid" maxlength="50">
+                </div>
+              </div>
+            </div>
+      
+            <div class="right_transferInfo">
+              <div class="button_group">
+                <button type="button" class="btn btn-default save_button" ng-click="gotohome()">Cancel</button>
+                <button type="button" class="btn btn-default send_button  save_btn" ng-disabled="forminvalid" ng-click="gotopbconfirm()">
+                PAY</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+    <div class="modal_popupSmall getuseraccountlisting_popup">
+    <div class="tophead_modal">
+        <div class="top_modalView"> 
+            <a href="" class="close_getbank_popup_modal close_login_modal">
+              <img src="images/close_white.png" alt="image">
+            </a>
+          <h2>Account</h2>
+          <span>Please choose an Account</span>
+        </div>
+    </div>
+      <ul class="accountlisting_view  mCustomScrollbar light" id="middle_bankoption">
+       
+      <script type="text/javascript">
+        
+     </script>
+   </ul>
+  </div>
+
+
+
+<script>
+
+	/* decimal work */
+function setTwoNumberDecimal(el) {
+    el.value = parseFloat(el.value).toFixed(2);
+}
+/* decimal work */
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<div class="formsection_content">
+<div class="middle_title">
+        <h2>Pay bills</h2>
+        <img src="images/octopus_image.png" alt="image">
+</div>
+
+	<div class="transfer_information informationfund_view clearfix visible-xs">
+	 <div class="button_group clearfix">
+			 <button type="button" class="btn btn-default save_button pay_bills_savefinal">Save</button>
+			 <button type="button" class="btn btn-default send_button save_button" ng-click="doit()">{{pbaction}}</button>
+			 <button type="button" class="btn btn-default send_button cancel_home">Cancel</button>
+		</div>
+		<loading></loading>
+		<div class="right_transferInfo">
+
+			<div class="mobile_transferfund">
+
+				<ul>
+					 <li>
+					 <div class="row">
+						 <div class="col-xs-4">
+						 <strong>Amount :</strong>
+						 </div>
+						 <div class="col-xs-7">{{pbconfirm.amt}}</div>
+
+					 </div>
+					 </li>
+
+					<li>
+							 <div class="row">
+								 <div class="col-xs-4">
+								 <strong>To :</strong>
+								 </div>
+								 <div class="col-xs-7" >{{pbconfirm.billername}}</div>
+
+							 </div>
+					</li>
+
+					<li>
+							 <div class="row">
+								 <div class="col-xs-4">
+								 <strong>Service :</strong>
+								 </div>
+								 <div class="col-xs-7" >{{pbconfirm.payitemname}}</div>
+							 </div>
+					</li>
+					<li>
+						 <div class="row" ng-show="pbconfirm.myaccountno">
+							 <div class="col-xs-4">
+							 <strong>Account :</strong>
+							 </div>
+							 <div class="col-xs-7" >{{pbconfirm.myaccountno}}</div>
+
+						 </div>
+					</li>
+				</ul>
+			</div>
+
+			 <ul class="transfer_infolist">
+				 <li id="debitinfo">Debit your account </li>
+				 <li id="creditinfo">Credit Biller {{pbconfirm.billername}}</li>
+				 <li id="notifyinfo">Inform Biller {{pbconfirm.billername}}</li>
+			 </ul>
+
+		</div>
+	</div>
+</div>
+

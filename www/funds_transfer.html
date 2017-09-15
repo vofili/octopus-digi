@@ -1,0 +1,71 @@
+	<div class="formsection_content">
+		<div class="middle_title">
+			<h2 class="hidden-xs">Funds Transfer </h2>
+				   <h2 class="visible-xs">Transaction Summary</h2>
+			<img src="images/octopus_image.png" alt="image">
+		</div>
+		<div class="transfer_information informationfund_view clearfix visible-xs">
+		 <div class="button_group clearfix">
+				 <button type="button" class="btn btn-default save_button save_buttonfinal">Save</button>
+				 <button type="button" ng-click="doFundsTransfer()" class="btn btn-default send_button  ">{{ftaction}}</button>
+				 <button type="button" class="btn btn-default send_button cancel_home">Cancel</button>
+			</div>
+			<loading></loading>
+			<div class="right_transferInfo">
+
+				<div class="mobile_transferfund">
+
+					<ul>
+						 <li>
+						 <div class="row">
+							 <div class="col-xs-4">
+							 <strong>Send</strong>
+							 </div>
+							 <div class="col-xs-7" id="ftsendamt">{{sendamount}}</div>
+
+						 </div>
+						 </li>
+
+						<li>
+								 <div class="row">
+									 <div class="col-xs-4">
+									 <strong>To :</strong>
+									 </div>
+									 <div class="col-xs-7" id="ftbeneficiaryname">{{benename}}</div>
+
+								 </div>
+					 	</li>
+
+					 	<li>
+								 <div class="row">
+									 <div class="col-xs-4">
+									 <strong>Bank :</strong>
+									 </div>
+									 <div class="col-xs-7" id="ftdestbank">{{benebankname}}</div>
+
+								 </div>
+				 		</li>
+					 	<li>
+							 <div class="row">
+								 <div class="col-xs-4">
+								 <strong>Account :</strong>
+								 </div>
+								 <div class="col-xs-7" id="ftdestaccount">{{sendaccount}}</div>
+
+							 </div>
+				 	 	</li>
+					</ul>
+				</div>
+
+				 <ul class="transfer_infolist">
+					 <li id="debitleg">Debit your account </li>
+					 <li id="creditleg">Credit {{benename}}'s account</li>
+					 <li id="infoleg">Inform {{benename}}</li>
+				 </ul>
+
+			</div>
+		</div>
+	</div>
+
+
+

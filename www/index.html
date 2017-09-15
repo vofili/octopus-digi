@@ -1,45 +1,1027 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-
-    <link rel="manifest" href="manifest.json">
-
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
+<html lang="en" ng-app="octngapp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>:: Octopus ::</title>
+    	<link href="css/custom.css" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet">
+        <link href="lib/owlcarousel2/assets/owl.carousel.min.css" rel="stylesheet"/>
+        <link href="css/checkbox.css" rel="stylesheet">
+        <link rel="manifest" href="/manifest.json">
+        <link href="lib/jquery-ui-bootstrap/jquery.ui.theme.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="lib/jquery-ui/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" href="lib/jquery-ui-bootstrap/jquery.ui.theme.font-awesome.css" />
+       	<link rel="stylesheet" href="lib/angularjs-datepicker/dist/angular-datepicker.css"/>
+       	<link rel="stylesheet" href="lib/sweetalert2/dist/sweetalert2.min.css"/>
+        <link rel="stylesheet" href="css/material-switch.css"/>
+ 		<!--IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+<!--    <link href="css/ionic.app.css" rel="stylesheet"> -->
+         <!--- JQuery --->
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyB5rxXMZimtNqsbp985TA4-m76B-9PTwB4",
+		authDomain: "octopus-55396.firebaseapp.com",
+		databaseURL: "https://octopus-55396.firebaseio.com",
+		projectId: "octopus-55396",
+		storageBucket: "octopus-55396.appspot.com",
+		messagingSenderId: "314985545776"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+        <script src="js/jquery.min.js"></script>
+		<script src="lib/jquery-ui/jquery-ui.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="js/wow.js"></script>
+		<script src="js/index.js"></script>
+		
+		<script src="lib/sweetalert2/dist/sweetalert2.min.js"></script>
+	<!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="js/angular-pageslide-directive.js"></script>
     <script src="js/app.js"></script>
-  </head>
-  <body ng-app="starter">
+    <script src="js/paybillscontroller.js"></script>
+    <script src="js/logincontroller.js"></script>
+	<script src="js/ftcontroller.js"></script>
+    <script src="js/mobilecontroller.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/cardservice.js"></script>
+    <script src="js/savecontroller.js"></script>
+    <script src="lib/ionic-native/ionic.native.js"></script>
+	<script src="lib/angularjs-datepicker/dist/angular-datepicker.js"></script>
+<!--	<script src="lib/ng.datepicker-ui/dist/ngDatepicker.min.js"></script>-->
+   	<script src="lib/owlcarousel2/owl.carousel.min.js"></script>
+    <script type='text/javascript' src="lib/cryptojslib/rollups/aes.js"></script>
+	<script type='text/javascript' src="lib/angular-cryptography/mdo-angular-cryptography.js"></script>
+	<script type="text/javascript" src="lib/angular-credit-cards/release/angular-credit-cards.js"></script>
+ 
+   	
+    <!-- your app's js -->
+    
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elem ents and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body ng-controller="homeController">
+  	        <div class="main_top">
+            <!--header start -->
+            <header>
+                <div class="container-fluid">
+                    <div class="row center-block">
+                        <div class="col-sm-4">
+                            <figure class="logo"><a href="index.html"><img src="images/logo.png" alt="logo" title="OCTOPUS"></a></figure>
+                        </div>
+                        </div>
+                        <div class="row center-block">
+                        <div class="col-sm-8">
+                                <div class="branch_button"> 
+                                    <a href="#/mybench" ng-click="refreshInboxArray();mobflag=true" class="btn btn-default"> My Bench </a>
+                                    <!--mobglag-true;-->
+                                </div>
+                              
+                        </div>
+					</div>
+                    
+                </div>
+            </header>
+         
+            <div class="container">
+                <div class="heading_content">
+                    <h1>BE MAGICAL <strong>WITH YOUR <b>fINGERTIPS </b> </strong> </h1>
+                    <div class="search_form wow zoomIn ">
+                      <input type="search" id="globalsearch" class="form-control hidden-xs inputsearch" placeholder="Express yourself, be free" ng-model="nlpsearchterm">
+                    
+						<input type="search" id="appglobalsearch" class="form-control visible-xs inputsearchmob" placeholder="Be magical with your fingertips" ng-model="nlpsearchterm">
+					    <button type="button"  class="btn btn-default" ng-click="donlpsearch(nlpsearchterm)">Search </button>
+					<div loader-css="ball-pulse"></div>
+                    </div>
+                 </div>
+            </div>
+               
+            <div class="bottom_content">
+                <div class="container">
+                      
+                      <ul class="banking_listing hidden-xs">
+                        <li class="wow fadeInRight" data-wow-delay="0.1s">
+                            <a class="mobilet" href="" ng-click="mobflag=true;gotomobile()">
+                                <figure ><img src="images/banking_icon.png"  alt="image"></figure>
+                                <strong>Mobile Topup</strong>
+                            </a>
+                        </li>
+                        <li class="wow fadeInRight" data-wow-delay="0.2s" >
+                            <a href="fundst" ng-click="mobflag=true;gotoft()">
+                                <figure><img src="images/transfer-send_icon_white.png" alt="image"></figure>
+                                <strong>Funds Transfer</strong>
+                            </a>
+                        </li>
+                        <li class="wow fadeInRight" data-wow-delay="0.3s">
+                            <a href="payb" ng-click="mobflag=true;gotopaybills()">
+                                <figure><img src="images/bill_icon_white.png" alt="image"></figure>
+                                <strong>Pay Bills</strong>
+                            </a>
+                        </li>
+                    </ul>
+                      
+                      
+                      
+                       <div class="owl-carousel owl-theme carousel-banking  visible-xs">
+                        <div class="item">
+                            <a class="mobilet" href="" ng-click="mobflag=true;gotomobile()">
+                                <figure><img src="images/banking_icon.png" alt="image"></figure>
+                                <strong>Mobile Topup</strong>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a class="fundst" href="" ng-click="mobflag=true;gotoft()">
+                                <figure><img src="images/transfer-send_icon_white.png" alt="image"></figure>
+                                <strong>Funds Transfer</strong>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a class="payb" href="" ng-click="mobflag=true;gotopaybills()">
+                                <figure><img src="images/bill_icon_white.png" alt="image"></figure>
+                                <strong>Pay Bills</strong>
+                            </a>
+                        </div>
+                    </div>
+                  
+                </div>
+                
+            </div>
+            
+            <footer class="hidden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="footer_listing">
+                                <li class="dropup">
+                                    <a href="#" class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Business</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><a href="">FinTech Services</a></li>
+                                        <li><a href="">Data and Analytics</a></li>
+                                        <li><a href="">Research and Development</a></li>
+                                        <li><a href="">Data and Analytics</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropup">
+                                    <a href="#" class="dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                        <li><a href="">FinTech Services</a></li>
+                                        <li><a href="">Data and Analytics</a></li>
+                                        <li><a href="">Research and Development</a></li>
+                                        <li><a href="">Data and Analytics</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"> About Qucoon</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="octopus_right">octopus sales agents</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            
+<!--           $(".modal_popup").addClass("modal_popup_active");-->
+            <div class="modal_popup" ng-class="{'modal_popup_active': mobflag}" id="slide_left">
+                <div class="inner_modalopen">
+                    <div class="top_headNav">
+                        <figure class="close_event"><a href="" class="popup_close" ng-click="mobflag=false"><img src="images/close_icon.png" alt="image"></a>
+                        </figure>
+                         <h2 class="rightusername visible-xs" ng-cloak><span>Hello</span> {{ returnname() }}</h2>
+                        <div class="middle_title visible-xs">
+                            <h2> Banking</h2>
+                            <img src="images/octopus_image.png" alt="image">
+                        </div>
+                        <ul class="top_navbar">
+                           <li class="dropdown tray_new hidden-xs ">
+                                <span class="newtraydynamic">
+                                </span><!-- Newtraydynamic -->
+                            </li>
+                            <li class="dropdown tray_new center_tray hidden-xs ">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a>
+                                <div class="dropdown-menu inbox_listview">
+                                    <h2>Mobile Top-up </h2>
+                                    <div class="tray_content">
+                                        <div class="left_tray">
+                                            <h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3>
+                                            <div class="amount_price"> <sup>N</sup>30,000.00 </div>
+                                        </div>
+                                        <div class="right_tray"><img src="images/mobile.png" alt="image"></div>
+                                        <div class="clearfix"></div>
+                                        <p class="payemnt_view">Payment for Motor Vehicle repair works</p>
+                                        <div class="button_new">
+                                            <button class="btn btn-default editphone">Open it </button>
+                                            <button class="btn btn-default deleteindex">Delete it </button>
+                                            <button class="btn btn-default mobiletopup_send_tray">Send it </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown tray_new tray_last hidden-xs">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a>
+                                <div class="dropdown-menu inbox_listview">
+                                    <h2>Funds Transfer </h2>
+                                    <div class="tray_content">
+                                        <div class="left_tray">
+                                            <h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3>
+                                            <div class="amount_price"> <sup>N</sup> 30,000.00 </div>
+                                        </div>
+                                        <div class="right_tray"><img src="images/fund_transfer.png" alt="image"></div>
+                                        <div class="clearfix"></div>
+                                        <p class="payemnt_view">Payment for Motor Vehicle repair works</p>
+                                        <div class="button_new">
+                                            <button class="btn btn-default editfundtransfer">Open it </button>
+                                            <button class="btn btn-default deleteindex">Delete it </button>
+                                            <button class="btn btn-default fundtransfer_sendit_index">Send it </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                           
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="indexbutton">
+                              Inbox  <span ng-if="inboxitems > 0" class="bankbadge">{{inboxitems}}</span>  </a> 
+                                <div class="dropdown-menu inbox_listview">
+                                    <h2>Transactions in your inbox</h2>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                        	 <tr ng-repeat="inboxtxn in inboxtxns">
+                                                <td><a href="">{{inboxtxn.transtype}}|{{inboxtxn.receivername}}
+													</a> </td>
+                                                <td ng-if="inboxitems > 0"><span> <a href="" ng-click="gotoinbox(inboxtxn)"> {{inboxtxn.amount}}</a> </span> <span> <a ng-click="gotoinbox(inboxtxn)" href=""> Open</a> m</span> <span> <a class="deleteindex" ng-click="gotoinboxdelete(inboxtxn)" href=""> Delete </a> </span> <span> 
+                                                <a class="" ng-click="gotoinboxapprove(inboxtxn)" href="">Approve </a> </span></td>
+                                                <!--<a class="paybills_approve" href="">Approve </a> </span></td>-->
+                                            </tr>
+                                         </table>
+                                    </div>
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
-  </body>
+                                </div>
+                            </li>
+                             <li class="hidden-xs"><a href="about_us.html">About us </a></li>
+                            <li class="hidden-xs"><a class="contact_us" href="#">Contact us</a></li>
+                          
+                            <li class="dropdown account_dropdown visible-xs">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
+                                
+                                <div class="dropdown-menu">
+                                    <h2>Accounts View </h2>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <td>View Accounts balances</td>
+                                                <td><a class="accounts_view_all_acbal open_smallpopup" href="" ng-click="gotoAccountListing()"> Go ahead </a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Add New Account</td>
+                                                <td><a class="addnewbank" href="" ui-sref="addaccount"> Go ahead </a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Add new Card</td>
+                                                 <td><a class="addnewbank" href=""  ui-sref="adddebitcard" ng-click="gotodebitcardadd()"> Go ahead </a></td>
+<!--                                                <td><a class="removebank open_smallpopup" href=""> Go ahead </a></td>-->
+                                            </tr>
+        
+                                          
+                                        </table>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown visible-xs mobile_transact">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Transact </a>
+                                <div class="dropdown-menu mobile-topup">
+                                    <h2>Transact</h2>
+                                    <ul>
+                                        <li><a class="newmobiletopup" ui-sref="mobiletopup">{{ mobilelinkname }}</a></li>
+                                        <li><a class="newfundtransfer" ui-sref="transfer">{{ ftlinkname }}</a></li>
+                                        <li><a class="payotherbill" ui-sref="paybills">{{ paybilllinkname }}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="" class="">
+						<ui-view>
+							<ion-content></ion-content>
+						</ui-view>
+					</div>
+               
+				</div>
+            </div>
+       
+			
+        </div>
+
+  	</body>
+<!--<script src="js/loginregister.js"></script>-->
+
+<script>
+    $('.owl-carousel').owlCarousel({
+       loop:true,
+       margin:0,
+       nav:true,
+    	autoplay:true,
+		items:1,
+		rewind:true,
+		dots:false,
+		 responsive:{
+           0:{
+               items:1
+           },
+           600:{
+               items:1
+           },
+           1000:{
+               items:1
+           }
+       }
+    })
+
+	
+$('.owl-carousel').on('click.owl.carousel', function(event) {
+   		console.log(event);
+		
+})
+
+</script>
+
+<script>
+    $(document).ready(function(){
+    
+    $("#transfer_event").click(function(){
+    $(".modal_popup").addClass("modal_popup_active");
+    $(".overlay_modal").addClass("c-mask-active");
+      });
+
+    $(".overlay_modal").click(function(){
+      $(".modal_popup").removeClass("modal_popup_active");
+    $(".overlay_modal").removeClass("c-mask-active");
+       });
+
+ });
+</script>
+
+<script>
+    $(document).ready(function(){
+    
+    $("#goevent").click(function(){
+    $(".modal_popup").addClass("modal_popup_active");
+    $(".overlay_modal").addClass("c-mask-active");
+      });
+
+    $(".overlay_modal").click(function(){
+      $(".modal_popup").removeClass("modal_popup_active");
+    $(".overlay_modal").removeClass("c-mask-active");
+       });
+
+ });
+</script>
+
+<script>
+    $(document).ready(function(){
+    
+    $("#mobile_event").click(function(){
+    $(".modal_popup").addClass("modal_popup_active");
+    $(".overlay_modal").addClass("c-mask-active");
+      });
+
+
+ });
+</script>
+
+<script>
+    $(document).ready(function(){
+    
+    $("#paybills_event").click(function(){
+    $(".modal_popup").addClass("modal_popup_active");
+    $(".overlay_modal").addClass("c-mask-active");
+      });
+
+
+ });
+</script>
+
+<script>
+    $(document).ready(function(){
+    	setHeight();
+    });
+
+    $(window).resize(function()
+		{
+      setHeight();
+    });
+    function setHeight()
+		{
+    	 	var windowheight=$(window).height();
+    		var headerheight=$('#top_headpopup').height();
+    	/*	var footerheight=$('#bottom-viewtop').height();*/
+    		var mainheight=parseInt(windowheight) - (parseInt(headerheight)+parseInt(0))-9;
+    		 $("#middle_accountoption").css('height', mainheight);
+    };
+
+
+
+</script>
+        <script>
+            $(document).ready(function()
+            {
+                $(document).on('click', '.open_smallpopup' ,function(){
+            		$(".modal_popupSmall").addClass("modal_popup_active");
+            		$(".overlay_modal_second").addClass("overlay_modal-active");
+
+                });
+
+            		$(document).on('click', '.close_smallmodal' , function(){
+            		$(".modal_popupSmall").removeClass("modal_popup_active");
+            		$(".overlay_modal_second").removeClass("overlay_modal-active");
+            		});
+
+            	$(".overlay_modal_second").click(function(){
+                $(".modal_popupSmall").removeClass("modal_popup_active");
+            		$(".overlay_modal_second").removeClass("overlay_modal-active");
+            	 });
+
+
+               $(document).on('click','.accountnumber',function(){
+                 var acntno = $(this).find('span').html();
+                 $(".modal_popupSmall").removeClass("modal_popup_active");
+                 $(".overlay_modal_second").removeClass("overlay_modal-active");
+                 $('#myaccount_number').parent().addClass('focused');
+                  $('#myaccount_number').val(acntno);
+
+               });
+
+            		
+//            		$(document).on('click','.cancel_home', function(){
+//
+//									$(".loading-content").show();
+//
+//									$(document).ajaxComplete(function(){
+//											$(".loading-content").hide();
+//									});
+//            			accountbankname
+//                                        $("#bodysection").load("bench_home.html");
+//                                        $(".modal_popup").addClass("modal_popup_active");
+//                                        $(".overlay_modal").addClass("c-mask-active");
+//                                    
+//            		});
+
+
+            		});
+
+            		
+            		$(document).on('click','.fundtransfer_sendit_index',function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+
+            			$('#bodysection').load("funds_transfer.html");
+            		});
+
+            		$(document).on('click','.editfundtransfer' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+
+            			$('#bodysection').load("send_money_form_edit.html");
+            			$(".modal_popupSmall").load("beneficiarylist.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click','.editmobile_topup' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+
+            			$('#bodysection').load("mobile_topup_form_edit.html");
+
+            		});
+            		
+
+            		$(document).on('click','.sendreceiveft' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("funds_transfer.html");
+            		});
+
+            		$(document).on('click','.editphone' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("mobile_topup_form_edit.html");
+            		});
+
+            		$(document).on('click','.mobile_send_receive' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("mobile-topup.html");
+            		});
+
+            		$(document).on('click','.pay_bills_savefinal' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("funds_transfer_confirmation.html");
+            			$('.newtraydynamic').html(' <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a><div class="dropdown-menu inbox_listview"><h2>Bills Payment</h2><div class="tray_content"><div class="left_tray"><h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3><div class="amount_price"> <sup>N</sup> 30,000.00 </div></div><div class="right_tray"><img src="images/account_image.png" alt="image"></div><div class="clearfix"></div><p class="payemnt_view">Payment for Motor Vehicle repair works</p><div class="button_new"><button class="btn btn-default pay bills_edit_form">Open it </button><button class="btn btn-default deletedynamic_tray">Delete it </button><button class="btn btn-default paybills_send_tray">Send it </button></div></div></div>');
+            		});
+            
+        </script>
+        <script>
+            $(document).ready(function(){
+
+            		$(document).on('click','.paybills_send_tray' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("pay_bills.html");
+
+            		});
+
+            		$(document).on('click','.mobile_topup_savefinal' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("funds_transfer_confirmation.html");
+            			$('.newtraydynamic').html(' <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a><div class="dropdown-menu inbox_listview"><h2>Mobile Top-up </h2><div class="tray_content"><div class="left_tray"><h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3><div class="amount_price"> <sup>N</sup> 30,000.00 </div></div><div class="right_tray"><img src="images/account_image.png" alt="image"></div><div class="clearfix"></div><p class="payemnt_view">Payment for Motor Vehicle repair works</p><div class="button_new"><button class="btn btn-default editphone">Open it </button><button class="btn btn-default deletedynamic_tray">Delete it </button><button class="btn btn-default mobiletopup_send_tray">Send it </button></div></div></div>');
+
+            		});
+
+            		$(document).on('click','.sendmoney_save' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("funds_transfer_confirmation.html");
+            			$('.newtraydynamic').html(' <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a><div class="dropdown-menu inbox_listview"> <h2>Fund Transfer </h2><div class="tray_content"><div class="left_tray"><h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3><div class="amount_price"> <sup>N</sup> 30,000.00 </div></div><div class="right_tray"><img src="images/account_image.png" alt="image"></div><div class="clearfix"></div><p class="payemnt_view">Payment for Motor Vehicle repair works</p><div class="button_new"><button class="btn btn-default editfundtransfer">Open it </button><button class="btn btn-default deletedynamic_tray">Delete it </button><button class="btn btn-default fundtransfer_sendit_index">Send it </button></div></div></div>');
+
+            		});
+
+            		$(document).on('click','.paybills_approve' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$('#bodysection').load("pay_bills.html");
+            		});
+
+            		$(document).on('click','.mobiletopup_send_tray' ,function(){
+									$(".loading-content").show();
+
+									$(document).ajaxComplete(function(){
+											$(".loading-content").hide();
+									});
+            			$("#bodysection").load("mobile-topup.html");
+            		});
+
+            //validation work paybills form saveit button
+            		$(document).on('click','.paybills_form_save', function(){
+            			var flag=1;
+            			
+            			if(flag ===1)
+            			{
+										$(".loading-content").show();
+
+										$(document).ajaxComplete(function(){
+												$(".loading-content").hide();
+										});
+            				$("#bodysection").load("funds_transfer_confirmation.html");
+            				$('.newtraydynamic').html(' <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tray 3 </a><div class="dropdown-menu inbox_listview"><h2>Bills Payment </h2><div class="tray_content"><div class="left_tray"><h3> <span>to: </span> <strong>David Benson</strong> 0002346509 | GTB </h3><div class="amount_price"> <sup>N</sup> 30,000.00 </div></div><div class="right_tray"><img src="images/account_image.png" alt="image"></div><div class="clearfix"></div><p class="payemnt_view">Payment for Motor Vehicle repair works</p><div class="button_new"><button class="btn btn-default paybills_edit_form">Open it </button><button class="btn btn-default deletedynamic_tray">Delete it </button><button class="btn btn-default paybills_send_tray">Send it </button></div></div></div>');
+
+            			}
+            		});
+            //validation work end
+
+//========================================================================================================================================================
+
+
+        function doft(){
+
+                 var pincode ="";
+
+                bootbox.prompt("Please input your PIN", function(result){
+                    localStorage.setItem("userpin",result);
+                    pincode = result;
+                    console.log("password entered "+ String(pincode));
+                        if(!(!pincode || 0 === pincode.length)){
+                                $(".loading-content").show();
+                                $("#bodysection").load("send_money.html");
+                                var datets = new Date();
+                                var currday = datets.getDate().toString(); 
+                                var currmonth = (datets.getMonth()+1).toString();
+                                var curryear = datets.getFullYear().toString();
+                                var currhour= datets.getHours().toString();
+                                var currmin = datets.getMinutes().toString();
+                                var currsec = datets.getSeconds().toString();
+                                var trans = curryear+currmonth+currday+currhour+currmin+currsec;
+                                var sess = curryear+currmonth+currday+currhour+currmin+currsec;    
+                                var debitendpoint='http://35.164.119.185:8080/qucoontm/operations/debitcustomer';
+                                var creditendpoint='http://35.164.119.185:8080/qucoontm/operations/creditcustomer';
+                                var phonenum = localStorage.getItem("phonenumber");
+                                var dracct = localStorage.getItem("ftsourceaccount");
+                                var srcbnk = localStorage.getItem("ftsourcebankcode");
+                                var craccount = localStorage.getItem("newuserft_destaccount");
+                                var destbnk = localStorage.getItem("ftdestbankcode");
+                                var amt = localStorage.getItem("newuserft_sendamount");
+                                var narr = localStorage.getItem("newuserft_destnarration");
+                                var pwd = localStorage.getItem("passcode");
+                                var accountstatus = localStorage.getItem("accountstatus");
+
+                                var debitpayload = {source:"MOBILE",transid:trans,sessid:sess,phonenumber:phonenum,accountstat:accountstatus,debitaccount:dracct,sourcebank:srcbnk,creditaccount:craccount,destbank:destbnk,amount:amt,narration:narr,passcode:pincode};
+
+                       
+                                console.log(JSON.stringify(debitpayload));
+
+
+                                $.ajax({
+                                        type: "POST",
+                                        url: debitendpoint,
+                                        contentType:"application/json",
+                                        dataType:"json",
+                                        data: JSON.stringify(debitpayload),
+                                        success: function(data,status,xHRQ){
+                                        console.log(data);
+                                        var resp = JSON.stringify(data);
+                                        if(data.responsecode ==='00'){
+                                                console.log('the returned response ' + data.responsecode);
+                                     
+                                                $(document).ajaxComplete(function(){
+                                                    $(".loading-content").hide();
+                                                    $('#animation').animate({'left' : '80%' },12000);
+                                                });
+                                                setTimeout(function(){
+                                                    $('#first').addClass("complete");
+                                                    $('strong#debitmessage').html('Debit <span>successful</span>');
+                                                }, 3000);
+                                              
+                                                localStorage.setItem("debitstatus","true");
+                                                localStorage.setItem("partialtxnref",data.transref);
+                                                
+                                              
+                                        }else{
+                                                        console.log('the failure returned response ' + data.responsecode);
+                                                        console.log("user status is invalid returned");
+                                                        localStorage.setItem("debitstatus","false");
+                                                        localStorage.setItem("partialtxnref",data.transref);
+                                                      
+                                                         $(document).ajaxComplete(function(){
+                                                            $(".loading-content").hide();
+                                                         
+                                                        });
+                                                        setTimeout(function(){
+                                                            $('#first').addClass("failed");
+                                                            $('strong#debitmessage').html('Sorry! <span>Bank not available </span>');
+                                                        }, 3000);
+                                                       
+                                                     
+
+                                                        return;
+
+                                        }
+                                    }
+                                });
+
+                                 //End the call to the debit function
+                                console.log("end the call to the debit function" + localStorage.getItem("debitstatus"));
+                                //start the call to the credit funciton
+                                console.log("start the call to the credit function");
+                                var creditpayload = {source:"MOBILE",transid:trans,sessid:sess,phonenumber:phonenum,accountstat:accountstatus,debitaccount:dracct,sourcebank:srcbnk,creditaccount:craccount,destbank:destbnk,amount:amt,narration:narr,passcode:pincode}; 
+                                console.log(JSON.stringify(creditpayload));
+                                var docreditflag = localStorage.getItem("debitstatus");
+                                console.log(docreditflag);
+
+                                if(docreditflag === "true"){
+                                        $.ajax({
+                                        type:"POST",
+                                        url:creditendpoint,
+                                        contentType:"application/json",
+                                        dataType:"json",
+                                        data: JSON.stringify(creditpayload),
+                                        success: function(data,status,xHRQ){
+                                            console.log(data);
+                                            var resp = JSON.stringify(data);
+                                            if(data.responsecode ==='00'){
+                                                    console.log('the returned response ' + data.responsecode);
+                                                    
+                                                    $(document).ajaxComplete(function(){
+                                                        $(".loading-content").hide();
+                                                        $('#animation').animate({'left' : '80%' },12000);
+                                                    });
+                                                    setTimeout(function(){
+                                                        $('#second').addClass("complete");
+                                                        $('strong#creditmessage').html('Credit <span>successful</span>');
+                                                    }, 6000);
+
+                                                    localStorage.setItem("partialtxnref",data.transref);
+                                                    
+                                            }else{
+                                                            console.log('the failure returned response ' + data.responsecode);
+                                                            console.log("user status is invalid returned");
+                                                            // $("#welcomeuserid").text("Hello Guest");
+                                                             $(document).ajaxComplete(function(){
+                                                                $(".loading-content").hide();
+                                                                //$('#animation').animate({'left' : '80%' },12000);
+                                                            });
+                                                              setTimeout(function(){
+                                                                $('#second').addClass("failed");
+                                                                 $('strong#creditmessage').html('Sorry! <span>Bank not available </span>');
+                                                            }, 6000);
+                                                        
+                                                            return;
+
+                                            }
+                                        }
+
+                                     });
+                                }      
+
+
+
+                        }  //end if 
+
+
+                }); // end bootbox
+
+
+
+        }
+
+
+//========================================================================================================================================================
+            		  //class in funds transfer page
+            		$(document).on('click', '.send_buttonfinal',fundsTransfer.doft);
+
+				$(document).on('focus blur','.inputbox_control' ,function (e) {
+            			$(this).parents('.form-group').toggleClass('focused', (e.type === 'focusin'|| this.value.length > 0));
+            		}).trigger('blur');
+
+            		$(document).on('click','.sendreqmyaccount', function(){
+
+            			$(".modal_popupSmall").load("myaccount_list.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click','.sendreq_hisher_account_history', function(){
+
+            			$(".modal_popupSmall").load("send_req_hisher_account_history.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.sendreq_hisher_account_octopus', function(){
+
+            			$(".modal_popupSmall").load("send_req_hisher_account_octopus.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.sendreq_howmuch_history', function(){
+
+            			$(".modal_popupSmall").load("howmuch_history.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.sendreq_howmuch_octopus', function(){
+
+            			$(".modal_popupSmall").load("howmuch_octopus.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            });
+            		$(document).on('click','.sendreq_inwhat_bank_list', function(){
+                            console.log("in what bank list clicked ");
+            			$(".modal_popupSmall").load("send_req_in_whatbank_list_staticlist.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+ // older implmentation of get bank list pop up 
+ //                    $(document).on('click','.sendreq_newuser_bank_list', function(){
+
+ //                        $(".modal_popupSmall").load("banklist_newuser.html", function(){
+ //                                        setHeight();
+ //                            $(".accountdetails_view").mCustomScrollbar();
+ //                        });
+ //                    });
+
+                    
+
+            		$(document).on('click','.sendreq_narrative_list', function(){
+
+            			$(".modal_popupSmall").load("narrative_list.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click','.beneficiarylist', function(){
+
+            			$(".modal_popupSmall").load("beneficiarylist.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.mobile_topup_myaccount_list', function(){
+
+            			$(".modal_popupSmall").load("myaccount_list.html", function(){
+
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+                    $(document).on('click', '.mobile_topup_mycard_list', function(){
+
+                        $(".modal_popupSmall").load("mycard_list.html", function(){
+
+                                        setHeight();
+                            $(".accountdetails_view").mCustomScrollbar();
+                        });
+                    });
+
+                    $(document).on('focusin', '#myaccount_number_mobile', function(){
+                            console.log("focusin in from index");
+                        $(".modal_popupSmall").load("myaccount_list.html", function(){
+
+                                        setHeight();
+                            $(".accountdetails_view").mCustomScrollbar();
+                        });
+                    });
+
+
+
+            	
+
+            		$(document).on('click', '.mobile_topup_howmuch_history', function(){
+
+            			$(".modal_popupSmall").load("howmuch_history.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.mobile_topup_howmuch_octopus', function(){
+
+            			$(".modal_popupSmall").load("howmuch_octopus.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+            		
+
+            		$(document).on('click', '.mobile_topup_users_phonebook', function(){
+
+            			$(".modal_popupSmall").load("mobile_topup_users_phonebook.html", function(){
+										setHeight();
+            			  $(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.paybills_myaccount', function(){
+
+            			$(".modal_popupSmall").load("myaccount_list.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+				
+					$(document).on('click', '.paybills_mycardlist', function(){
+
+            			$(".modal_popupSmall").load("myaccount_list.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+
+                    $(document).on('click', '.destaccount', function(){
+
+                        $(".modal_popupSmall").load("banklist.html", function(){
+                                        setHeight();
+                            $(".accountdetails_view").mCustomScrollbar();
+                        });
+                    });
+
+
+                      $(document).on('click', '.destbanklist', function(){
+
+                        $(".modal_popupSmall").load("banklist.html", function(){
+                                        setHeight();
+                            $(".accountdetails_view").mCustomScrollbar();
+                        });
+                    });
+
+//add a handler to dynamically load sotred accounts from localstorage
+                    $(document).on('click','.paybills_myaccountlist',function(){
+                           // alert($(this).length);
+                           console.log("account list clicked");
+                            $(".modal_popupSmall").load("myaccount_list.html", function(){
+                                        setHeight();
+                                        $(".accountdetails_view").mCustomScrollbar();
+                            });
+                    });
+
+            	
+            		$(document).on('click', '.paybills_howmuch_history', function(){
+
+            			$(".modal_popupSmall").load("howmuch_history.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.paybills_howmuch_octopus', function(){
+
+            			$(".modal_popupSmall").load("howmuch_octopus.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.paybills_productservice_history', function(){
+
+            			$(".modal_popupSmall").load("paybills_productservice_history.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.paybills_productservice_octopus', function(){
+
+            			$(".modal_popupSmall").load("paybills_productservice_octopus.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+            		});
+
+            		$(document).on('click', '.paybills_narrative_list', function(){
+
+            			$(".modal_popupSmall").load("narrative_list.html", function(){
+										setHeight();
+            				$(".accountdetails_view").mCustomScrollbar();
+            			});
+
+            		});
+
+
+            });
+
+
+        </script>
+        <script type="text/javascript">
+           
+//            function toTitleCase(str)
+//                {
+//                    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+//                }
+        </script>
+        </ion-pane>
+    </body>
 </html>

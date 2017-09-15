@@ -1,1 +1,17 @@
 /* Empty. Add your own CSS if you like */
+	
+body,html{height:100%;}
+body:before{position:absolute; top:0px; left:0px; height:100%; width:100%; content:''; background-image:url(../images/line_dot.png); background-repeat:repeat;}
+body:after {
+  background-color: #000;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.65;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.main_top{position:relative; z-index:1;}
+
+body{ background-image:url(../images/banner_image.jpg); background-repeat:no-repeat; background-position:center top; background-size:cover; height:100%;  -ms-transition: all 0.5s ease 0s; -moz-transition: all 0.5s ease 0s; -o-transition: all 0.5s ease 0s; -webkit-transition: all 0.5s ease 0s; transition: all 0.5s ease 0s; overflow-x:hidden;      font-family: 'open_sansregular'; }
